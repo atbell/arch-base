@@ -16,7 +16,7 @@ RUN echo LANG="en_US.UTF-8" > /etc/locale.conf
 RUN pacman -Syu --ignore filesystem --noconfirm
 
 # add in pre-req from official repo
-RUN pacman -S --needed base-devel supervisor --noconfirm
+RUN yes | pacman -Scc && pacman -Sy --needed base-devel supervisor --noconfirm
 
 # add supervisor configuration file
 ADD supervisor.conf /etc/supervisor.conf
