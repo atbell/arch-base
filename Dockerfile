@@ -16,7 +16,10 @@ RUN echo LANG="en_US.UTF-8" > /etc/locale.conf
 RUN pacman -Syu --ignore filesystem --noconfirm
 
 # add in pre-req from official repo
-RUN yes | pacman -Scc && pacman -Sy --needed base-devel supervisor --noconfirm
+RUN pacman -S supervisor --noconfirm
+
+# add in development tools to build packer
+RUN pacman -S --needed base-devel --noconfirm
 
 # add supervisor configuration file
 ADD supervisor.conf /etc/supervisor.conf
@@ -45,4 +48,4 @@ RUN pacman -U /root/packer/packer*.tar.xz --noconfirm
 # cleanup
 #########
 
-RUN pacman -Scc --noconfirm; rm -rf /root/* /tmp/* /archlinux/usr/share/locale /archlinux/usr/share/man /etc/supervisor.d /etc/supervisord.conf
+RUN pacman -Scc --noconfirm; rm -rf /root/* /tmp/* /archlinux/usr/share/locale /archlinux/usr/share/man
