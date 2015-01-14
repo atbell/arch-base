@@ -13,7 +13,7 @@ RUN locale-gen
 RUN echo LANG="en_US.UTF-8" > /etc/locale.conf
 
 # perform system update (must ignore package "filesystem")
-RUN pacman-db-upgrade && pacman -Syyu --ignore filesystem --noconfirm
+RUN pacman -Syyu --ignore filesystem --noconfirm && pacman-db-upgrade
 
 # add in pre-req from official repo
 RUN pacman -S supervisor --noconfirm
