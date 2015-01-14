@@ -3,6 +3,12 @@ MAINTAINER atbell
 
 # base
 
+# setup unprivileged user to run makepkg as
+RUN adduser --disabled-password --gecos '' a && \
+    adduser a sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
+
 # set environment variables
 ENV HOME /root
 ENV LANG en_US.UTF-8
@@ -41,13 +47,13 @@ RUN chmod -R 775 /home/nobody
 ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /root/packer.tar.gz
 
 # download packer from aur
-RUN sudo -u nobody "cd /tmp && \
+RUN su -m a -c "cd /tmp && \
     tar -xzf packer.tar.gz && \
     cd /tmp/packer && \
     makepkg -s --noconfirm"
 
 # install packer using pacman
-RUN pacman -U /root/packer/packer*.tar.xz --noconfirm
+RUN pacman -U /tmp/packer/packer*.tar.xz --noconfirm
 
 # cleanup
 #########
