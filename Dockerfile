@@ -4,8 +4,8 @@ MAINTAINER atbell
 # base
 
 # setup unprivileged user to run makepkg as
-RUN adduser --disabled-password --gecos '' a && \
-    adduser a sudo && \
+RUN groupadd sudo && \ 
+    useradd a -G sudo &&
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 
