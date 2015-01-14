@@ -41,10 +41,10 @@ RUN chmod -R 775 /home/nobody
 ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /root/packer.tar.gz
 
 # download packer from aur
-RUN cd /root && \
-	tar -xzf packer.tar.gz && \
-    cd /root/packer && \
-    makepkg -s --asroot --noconfirm
+RUN sudo -u nobody "cd /tmp && \
+    tar -xzf packer.tar.gz && \
+    cd /tmp/packer && \
+    makepkg -s --noconfirm"
 
 # install packer using pacman
 RUN pacman -U /root/packer/packer*.tar.xz --noconfirm
