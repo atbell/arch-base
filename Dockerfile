@@ -44,7 +44,7 @@ RUN chmod -R 775 /home/nobody
 ########
 
 # download packer from aur
-ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /root/packer.tar.gz
+ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /tmp/packer.tar.gz
 
 # download packer from aur
 RUN su -m a -c "cd /tmp && \
