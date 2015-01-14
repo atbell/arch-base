@@ -27,8 +27,12 @@ ADD supervisor.conf /etc/supervisor.conf
 # home
 ######
 
+# create user nobody home directory
+RUN mkdir -p /home/nobody
+
 # set permissions
-RUN mkdir -p /home/nobody && chown -R nobody:users /home/nobody && chmod -R 775 /home/nobody
+RUN chown -R nobody:users /home/nobody
+RUN chmod -R 775 /home/nobody
 
 # packer
 ########
@@ -36,7 +40,7 @@ RUN mkdir -p /home/nobody && chown -R nobody:users /home/nobody && chmod -R 775 
 # download packer from aur
 ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /root/packer.tar.gz
 
-# download & install packer from aur
+# download packer from aur
 RUN cd /root && \
 	tar -xzf packer.tar.gz && \
     cd /root/packer && \
