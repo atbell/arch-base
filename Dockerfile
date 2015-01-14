@@ -5,7 +5,7 @@ MAINTAINER atbell
 
 # setup unprivileged user to run makepkg as
 RUN groupadd sudo && \ 
-    useradd a -G sudo &&
+    useradd a -G sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
 
 
