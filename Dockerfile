@@ -47,7 +47,8 @@ RUN chmod -R 775 /home/nobody
 ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /tmp/packer.tar.gz
 
 # download packer from aur
-RUN su -m a -c "cd /tmp && \
+RUN chmod 777 /tmp/packer.tar.gz && \
+    su -m a -c "cd /tmp && \
     tar -xzf packer.tar.gz && \
     cd /tmp/packer && \
     makepkg -s --noconfirm"
