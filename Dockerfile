@@ -51,7 +51,7 @@ RUN chmod 777 /tmp/packer.tar.gz && \
     su -m a -c "cd /tmp && \
     tar -xzf packer.tar.gz && \
     cd /tmp/packer && \
-    makepkg -s --noconfirm"
+    sudo makepkg -s --noconfirm"
 
 # install packer using pacman
 RUN pacman -U /tmp/packer/packer*.tar.xz --noconfirm
