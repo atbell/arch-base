@@ -9,7 +9,7 @@ ENV LANG en_US.UTF-8
 
 RUN groupadd sudo && \
     echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    gpasswd -a nobody sudo &&    
+    gpasswd -a nobody sudo
 
 # set locale
 RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen
