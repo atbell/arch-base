@@ -46,7 +46,7 @@ ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /tmp/packer.tar.g
 
 # download packer from aur
 RUN chmod 777 /tmp/packer.tar.gz && \
-    sudo -u nobody "cd /tmp && \
+    sudo -u nobody /bin/bash -c "cd /tmp && \
     tar -xzf packer.tar.gz && \
     cd /tmp/packer && \
     /usr/bin/makepkg -s --noconfirm"
