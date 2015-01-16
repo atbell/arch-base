@@ -7,6 +7,9 @@ MAINTAINER atbell
 ENV HOME /root
 ENV LANG en_US.UTF-8
 
+RUN gpasswd -a nobody sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+
 # set locale
 RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen
 RUN locale-gen
@@ -45,7 +48,7 @@ RUN chmod 777 /tmp/packer.tar.gz && \
     sudo -u nobody "cd /tmp && \
     tar -xzf packer.tar.gz && \
     cd /tmp/packer && \
-    /usr/bin/makepkg --noconfirm"
+    /usr/bin/makepkg -s --noconfirm"
 
 # install packer using pacman
 RUN pacman -U /tmp/packer/packer*.tar.xz --noconfirm
@@ -53,4 +56,6 @@ RUN pacman -U /tmp/packer/packer*.tar.xz --noconfirm
 # cleanup
 #########
 
-RUN pacman -Scc --noconfirm; rm -rf /root/* /tmp/* /archlinux/usr/share/locale /archlinux/usr/share/man
+RUN pacman -Scc --noconfirm && \
+    rm -rf /root/* /tmp/* /archlinux/usr/share/locale /archlinux/usr/share/man && \
+    gpasswd -d nobody sudo
