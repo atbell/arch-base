@@ -7,8 +7,9 @@ MAINTAINER atbell
 ENV HOME /root
 ENV LANG en_US.UTF-8
 
-RUN gpasswd -a nobody sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers
+RUN groupadd sudo && \
+    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
+    gpasswd -a nobody sudo &&    
 
 # set locale
 RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen
