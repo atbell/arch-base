@@ -7,9 +7,9 @@ MAINTAINER atbell
 ENV HOME /root
 ENV LANG en_US.UTF-8
 
-RUN groupadd sudo && \
-    echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers && \
-    echo 'Defaults:nobody !requiretty' >> /etc/sudoers && \
+RUN groupadd sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers; \
+    echo 'Defaults:nobody !requiretty' >> /etc/sudoers; \
     gpasswd -a nobody sudo
 
 # set locale
