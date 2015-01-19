@@ -7,11 +7,6 @@ MAINTAINER atbell
 ENV HOME /root
 ENV LANG en_US.UTF-8
 
-RUN groupadd sudo
-RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers; \
-    echo 'Defaults:nobody !requiretty' >> /etc/sudoers; \
-    gpasswd -a nobody sudo
-
 # set locale
 RUN echo en_US.UTF-8 UTF-8 > /etc/locale.gen
 RUN locale-gen
@@ -41,6 +36,10 @@ RUN chmod -R 775 /home/nobody
 
 # packer
 ########
+RUN groupadd sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> /etc/sudoers; \
+    echo 'Defaults:nobody !requiretty' >> /etc/sudoers; \
+    gpasswd -a nobody sudo
 
 # download packer from aur
 ADD https://aur.archlinux.org/packages/pa/packer/packer.tar.gz /tmp/packer.tar.gz
